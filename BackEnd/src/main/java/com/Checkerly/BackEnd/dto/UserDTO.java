@@ -2,6 +2,8 @@ package com.Checkerly.BackEnd.dto;
 
 import java.io.Serializable;
 
+import com.Checkerly.BackEnd.domain.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,9 @@ public class UserDTO implements Serializable{
 	private String name;
 	private String email;
 	
+	public UserDTO(User obj) {
+		id = obj.getId();
+		name = obj.getName();
+		email = obj.getEmail();
+	}
 }
