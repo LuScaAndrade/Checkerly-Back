@@ -21,7 +21,7 @@ import com.Checkerly.BackEnd.dto.UserDTO;
 import com.Checkerly.BackEnd.services.UserService;
 
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value="/users")
 public class UserResource {
     	
 	@Autowired

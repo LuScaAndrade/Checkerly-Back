@@ -26,7 +26,9 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
-		return repo.insert(obj);
+		User savedUser = repo.insert(obj);
+		System.out.println("User inserted: " + savedUser);
+		return savedUser;
 	}
 	
 	public void delete(String id) {
