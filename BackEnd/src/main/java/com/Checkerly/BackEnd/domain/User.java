@@ -23,8 +23,10 @@ public class User implements Serializable{
 	@Id
 	private String id;
 	private String name;
+	private String senha;
 	private String email;
-
+	private String celular;
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
