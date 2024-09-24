@@ -2,8 +2,11 @@ package com.Checkerly.BackEnd.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +29,18 @@ public class Organizer implements Serializable{
 	private String senha;
 	private String email;
 	private String celular;
+
+@DBRef(lazy = true)
+	private List<Event> events = new ArrayList<>();
+
+	public Organizer(String id, String name, String senha, String email, String celular) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.senha = senha;
+		this.email = email;
+		this.celular = celular;
+	}
 	
 	@Override
 	public int hashCode() {
