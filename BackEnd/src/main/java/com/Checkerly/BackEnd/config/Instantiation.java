@@ -47,6 +47,7 @@ public class Instantiation implements CommandLineRunner{
 		eventRepository.saveAll(Arrays.asList(event1));
 
 		Organizer Lucas = new Organizer(null, "Lucas","1234", "Lucas@xyz.com", "6199999-9999");
+		Lucas.getEvents().addAll(Arrays.asList(event1));
 		organizerRepository.saveAll(Arrays.asList(Lucas));
 	}
 }

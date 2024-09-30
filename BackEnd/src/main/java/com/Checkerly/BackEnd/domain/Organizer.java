@@ -30,7 +30,7 @@ public class Organizer implements Serializable{
 	private String email;
 	private String celular;
 
-@DBRef(lazy = true)
+	@DBRef(lazy = true)
 	private List<Event> events = new ArrayList<>();
 
 	public Organizer(String id, String name, String senha, String email, String celular) {
