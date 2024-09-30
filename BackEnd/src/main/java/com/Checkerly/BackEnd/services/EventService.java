@@ -62,6 +62,6 @@ public class EventService {
 	}
 
 	public Event fromDTO(EventDTO objDto) {
-		return new Event(objDto.getId(), objDto.getNomeEvento(),objDto.getAssuntoEvento(), objDto.getDataInicio(), objDto.getDataFim(), objDto.getHoraEvento());
+		return new Event(objDto.getId(), objDto.getNomeEvento(),objDto.getAssuntoEvento(), objDto.getLocalEvento(),objDto.getDataInicio(), objDto.getDataFim(), objDto.getHoraEvento());
 	}
 }
