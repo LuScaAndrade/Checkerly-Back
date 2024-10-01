@@ -33,6 +33,7 @@ public class EventDTO implements Serializable{
 		id = obj.getId();
 		nomeEvento = obj.getNomeEvento();
 		assuntoEvento = obj.getAssuntoEvento();
+		localEvento = obj.getLocalEvento();
 		dataInicio = obj.getDataInicio();
 		dataFim = obj.getDataFim();
         horaEvento = obj.getHoraEvento();

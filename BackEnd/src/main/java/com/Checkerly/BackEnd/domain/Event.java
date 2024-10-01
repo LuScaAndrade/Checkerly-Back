@@ -29,7 +29,6 @@ public class Event implements Serializable{
 	private String localEvento;
 	private Date dataInicio;
 	private Date dataFim;
-    
 	private LocalTime horaEvento;
 
     @Override
