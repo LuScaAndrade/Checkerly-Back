@@ -1,8 +1,9 @@
 package com.Checkerly.BackEnd.config;
 
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class Instantiation implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat shf = new SimpleDateFormat("HH:mm");
+		DateTimeFormatter shf = DateTimeFormatter.ofPattern("HH:mm");
         userRepository.deleteAll();
 		eventRepository.deleteAll();
 		organizerRepository.deleteAll();
@@ -40,7 +41,9 @@ public class Instantiation implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-		Event event1  = new Event(null, "Evento Qualquer", "Tecnologia", "Uniceplac", sdf.parse("24/09/2024"), sdf.parse("25/09/2024"), shf.parse("13:50"));
+		LocalTime eventHour = LocalTime.parse("13:50", shf);
+
+		Event event1  = new Event(null, "Evento Qualquer", "Tecnologia", "Uniceplac", sdf.parse("24/09/2024"), sdf.parse("25/09/2024"), eventHour);
 		eventRepository.saveAll(Arrays.asList(event1));
 
 		Organizer Lucas = new Organizer(null, "Lucas","1234", "Lucas@xyz.com", "6199999-9999");

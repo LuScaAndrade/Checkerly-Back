@@ -1,6 +1,7 @@
 package com.Checkerly.BackEnd.domain;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class Event implements Serializable{
 	private String localEvento;
 	private Date dataInicio;
 	private Date dataFim;
-    private Date horaEvento;
+    private LocalTime horaEvento;
 
     @Override
 	public int hashCode() {

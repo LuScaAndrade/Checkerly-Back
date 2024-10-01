@@ -1,6 +1,7 @@
 package com.Checkerly.BackEnd.dto;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -26,7 +27,7 @@ public class EventDTO implements Serializable{
 	private String localEvento;
 	private Date dataInicio;
 	private Date dataFim;
-    private Date horaEvento;
+    private LocalTime horaEvento;
 
     public EventDTO(Event obj) {
 		id = obj.getId();
