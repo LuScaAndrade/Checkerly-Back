@@ -29,7 +29,8 @@ public class Event implements Serializable{
 	private String localEvento;
 	private Date dataInicio;
 	private Date dataFim;
-    private LocalTime horaEvento;
+    
+	private LocalTime horaEvento;
 
     @Override
 	public int hashCode() {
