@@ -27,7 +27,7 @@ public class OrganizerService {
 	}
 	
 	public Organizer insert(Organizer obj) {
-		Organizer savedOrganizer = repo.insert(obj);
+		Organizer savedOrganizer = repo.save(obj);
 		System.out.println("Organizer inserted: " + savedOrganizer);
 		return savedOrganizer;
 	}

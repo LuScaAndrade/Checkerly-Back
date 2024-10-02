@@ -37,7 +37,7 @@ public class EventService {
 	}
 
 		public Event insert(Event obj) {
-		Event savedEvent = repo.insert(obj);
+		Event savedEvent = repo.save(obj);
 		System.out.println("Event inserted: " + savedEvent);
 		return savedEvent;
 	}
