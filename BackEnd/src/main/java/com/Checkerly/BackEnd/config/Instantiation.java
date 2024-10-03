@@ -33,9 +33,7 @@ public class Instantiation implements CommandLineRunner {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		DateTimeFormatter shf = DateTimeFormatter.ofPattern("HH:mm");
 
-		User maria;
-		User alex;
-		User bob;
+		User maria,alex,bob;
 
 		LocalTime eventHour = LocalTime.parse("13:50", shf);
 		Event event1;
