@@ -1,0 +1,4 @@
+spring:
+  data:
+      mongodb:
+        uri: mongodb+srv://checkerly:rU32JNG2XOduDjEy@checkerly.g99lj.mongodb.net/checkerly?retryWrites=true&w=majority
