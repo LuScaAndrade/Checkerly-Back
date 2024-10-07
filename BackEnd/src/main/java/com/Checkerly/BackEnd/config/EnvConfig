@@ -1,0 +1,32 @@
+package com.Checkerly.BackEnd.config;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
+import io.github.cdimascio.dotenv.Dotenv;
+
+@Configuration
+public class EnvConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(EnvConfig.class);
+
+    @PostConstruct
+    public void loadEnv() {
+        try {
+            // Carregar as variáveis do .env
+            Dotenv dotenv = Dotenv.load();
+            String mongoUri = dotenv.get("SPRING_DATA_MONGODB_URI");
+
+            // Definir a variável de ambiente para ser usada pelo Spring Boot
+            System.setProperty("SPRING_DATA_MONGODB_URI", mongoUri);
+
+            // Log para verificar se a URI foi carregada corretamente
+            logger.info("MongoDB URI carregada do .env: {}", mongoUri);
+
+        } catch (Exception e) {
+            logger.error("Erro ao carregar as variáveis do .env: {}", e.getMessage());
+        }
+    }
+}
