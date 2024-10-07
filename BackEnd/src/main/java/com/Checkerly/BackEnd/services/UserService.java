@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Checkerly.BackEnd.domain.User;
@@ -13,8 +14,12 @@ import com.Checkerly.BackEnd.services.exception.ObjectNotFoundException;
  
 @Service
 public class UserService {
-@Autowired
+	
+	@Autowired
 	private UserRepository repo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<User> findAll(){
 		return repo.findAll();
@@ -26,9 +31,9 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
-		User savedUser = repo.save(obj);
-		System.out.println("User inserted: " + savedUser);
-		return savedUser;
+        String encodedPassword = passwordEncoder.encode(obj.getSenha());
+        obj.setSenha(encodedPassword);
+        return repo.save(obj);
 	}
 	
 	public void delete(String id) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Checkerly.BackEnd.domain.Organizer;
@@ -16,6 +17,9 @@ public class OrganizerService {
 
 	@Autowired
     private OrganizerRepository repo;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder; 
 	
 	public List<Organizer> findAll(){
 		return repo.findAll();
@@ -27,9 +31,9 @@ public class OrganizerService {
 	}
 	
 	public Organizer insert(Organizer obj) {
-		Organizer savedOrganizer = repo.save(obj);
-		System.out.println("Organizer inserted: " + savedOrganizer);
-		return savedOrganizer;
+        String encodedPassword = passwordEncoder.encode(obj.getSenha());
+        obj.setSenha(encodedPassword);
+        return repo.save(obj);
 	}
 	
 	public void delete(String id) {
