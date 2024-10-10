@@ -24,7 +24,8 @@ public class EventDTO implements Serializable{
 	private String id;
 	private String nomeEvento;
 	private String assuntoEvento;
-	private String localEvento;
+	private String latitude;
+	private String longitude;
 	private Date dataInicio;
 	private Date dataFim;
     private LocalTime horaEvento;
@@ -33,7 +34,8 @@ public class EventDTO implements Serializable{
 		id = obj.getId();
 		nomeEvento = obj.getNomeEvento();
 		assuntoEvento = obj.getAssuntoEvento();
-		localEvento = obj.getLocalEvento();
+		latitude = obj.getLatitude();
+		longitude = obj.getLongitude();
 		dataInicio = obj.getDataInicio();
 		dataFim = obj.getDataFim();
         horaEvento = obj.getHoraEvento();

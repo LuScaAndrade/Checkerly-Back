@@ -25,7 +25,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // Porta do seu front-end
+                        .allowedOrigins("http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true); // Se necessário para enviar cookies/autenticação
@@ -40,7 +40,7 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())  // Desabilita CSRF
         .authorizeRequests(auth -> auth
             .requestMatchers("/login").permitAll()
-            .requestMatchers("/users/**", "/organizers/**").authenticated()  // Requer autenticação para essas URLs
+            .requestMatchers("/users/**", "/organizers/**", "/events/**").authenticated()  // Requer autenticação para essas URLs
             //.anyRequest().permitAll()  // Permite todos os outros acessos
         )
         
