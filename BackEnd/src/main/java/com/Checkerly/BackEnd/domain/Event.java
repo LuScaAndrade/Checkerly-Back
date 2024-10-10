@@ -26,7 +26,8 @@ public class Event implements Serializable{
 	private String id;
 	private String nomeEvento;
 	private String assuntoEvento;
-	private String localEvento;
+	private String latitude;
+	private String longitude;
 	private Date dataInicio;
 	private Date dataFim;
 	private LocalTime horaEvento;

@@ -1,4 +1,4 @@
 spring:
   data:
-      mongodb:
-        uri: ${SPRING_DATA_MONGODB_URI}
+    mongodb:
+      uri: mongodb+srv://checkerly:rU32JNG2XOduDjEy@checkerly.g99lj.mongodb.net/checkerly

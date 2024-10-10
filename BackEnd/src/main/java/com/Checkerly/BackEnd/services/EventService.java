@@ -56,12 +56,14 @@ public class EventService {
 	private void updateData(Event newObj, Event obj) {
 		newObj.setNomeEvento(obj.getNomeEvento());
 		newObj.setAssuntoEvento(obj.getAssuntoEvento());
+		newObj.setLatitude(obj.getLatitude());
+		newObj.setLongitude(obj.getLongitude());
 		newObj.setDataInicio(obj.getDataInicio());
 		newObj.setDataFim(obj.getDataFim());
 		newObj.setHoraEvento(obj.getHoraEvento());
 	}
 
 	public Event fromDTO(EventDTO objDto) {
-		return new Event(objDto.getId(), objDto.getNomeEvento(),objDto.getAssuntoEvento(), objDto.getLocalEvento(),objDto.getDataInicio(), objDto.getDataFim(), objDto.getHoraEvento());
+		return new Event(objDto.getId(), objDto.getNomeEvento(),objDto.getAssuntoEvento(), objDto.getLatitude(), objDto.getLongitude(), objDto.getDataInicio(), objDto.getDataFim(), objDto.getHoraEvento());
 	}
 }
