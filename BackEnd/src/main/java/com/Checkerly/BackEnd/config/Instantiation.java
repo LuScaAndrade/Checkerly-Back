@@ -46,9 +46,9 @@ public class Instantiation implements CommandLineRunner {
 			bob = new User(null, "Bob Grey", "1234", "Bob Grey", "6199999-9999");
 			userRepository.saveAll(Arrays.asList(maria, alex, bob));
 		} else {
-			maria = userRepository.findAll().get(0);
-			alex = userRepository.findAll().get(0);
-			bob = userRepository.findAll().get(0);
+			maria = userRepository.findAll().getFirst();
+			alex = userRepository.findAll().getFirst();
+			bob = userRepository.findAll().getFirst();
 		}
 
 		if (eventRepository.count() == 0) {
@@ -56,7 +56,7 @@ public class Instantiation implements CommandLineRunner {
 					sdf.parse("25/09/2024"), eventHour);
 			eventRepository.save(event1);
 		} else {
-			event1 = eventRepository.findAll().get(0);
+			event1 = eventRepository.findAll().getFirst();
 		}
 
 		if (organizerRepository.count() == 0) {
@@ -64,7 +64,7 @@ public class Instantiation implements CommandLineRunner {
 			lucas.getEvents().add(event1);
 			organizerRepository.save(lucas);
 		} else {
-			lucas = organizerRepository.findAll().get(0);
+			lucas = organizerRepository.findAll().getFirst();
 		}
 	}
 }

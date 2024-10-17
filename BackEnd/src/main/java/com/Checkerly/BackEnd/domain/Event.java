@@ -1,5 +1,6 @@
 package com.Checkerly.BackEnd.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
@@ -20,7 +21,8 @@ import lombok.Setter;
 @Document
 
 public class Event implements Serializable{
-    private static final long serialVersionUID = 1L;
+    @Serial
+	private static final long serialVersionUID = 1L;
     
     @Id
 	private String id;

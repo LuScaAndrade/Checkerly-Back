@@ -1,5 +1,6 @@
 package com.Checkerly.BackEnd.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Document
 
 public class User implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

@@ -32,7 +32,7 @@ public class OrganizerResource {
 	@GetMapping
 	public ResponseEntity <List<OrganizerDTO>> findAll() {
 		List<Organizer> list = service.findAll();
-		List<OrganizerDTO> listDto = list.stream().map(x -> new OrganizerDTO(x)).collect(Collectors.toList());
+		List<OrganizerDTO> listDto = list.stream().map(OrganizerDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 	

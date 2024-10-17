@@ -1,5 +1,6 @@
 package com.Checkerly.BackEnd.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.Checkerly.BackEnd.domain.Organizer;
@@ -15,7 +16,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class OrganizerDTO implements Serializable{
-    private static final long serialVersionUID = 1L;
+    @Serial
+	private static final long serialVersionUID = 1L;
 	
 	private String id;
 	private String name;

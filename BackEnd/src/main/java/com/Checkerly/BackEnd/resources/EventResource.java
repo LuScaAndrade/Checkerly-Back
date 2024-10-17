@@ -63,7 +63,7 @@ public class EventResource {
 	@GetMapping
 	public ResponseEntity <List<EventDTO>> findAll() {
 		List<Event> list = service.findAll();
-		List<EventDTO> listDto = list.stream().map(x -> new EventDTO(x)).collect(Collectors.toList());
+		List<EventDTO> listDto = list.stream().map(EventDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 
