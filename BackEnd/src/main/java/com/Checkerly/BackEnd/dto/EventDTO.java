@@ -26,8 +26,8 @@ public class EventDTO implements Serializable{
 	private String id;
 	private String nomeEvento;
 	private String assuntoEvento;
-	private String latitude;
-	private String longitude;
+	private Double latitude;
+	private Double longitude;
 	private Date dataInicio;
 	private Date dataFim;
     private LocalTime horaEvento;

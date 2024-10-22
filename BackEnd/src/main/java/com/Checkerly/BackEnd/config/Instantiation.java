@@ -52,7 +52,7 @@ public class Instantiation implements CommandLineRunner {
 		}
 
 		if (eventRepository.count() == 0) {
-			event1 = new Event(null, "Evento Qualquer", "Tecnologia", "-15.90", "48.07", sdf.parse("24/09/2024"),
+			event1 = new Event(null, "Evento Qualquer", "Tecnologia", -15.90, 48.07, sdf.parse("24/09/2024"),
 					sdf.parse("25/09/2024"), eventHour);
 			eventRepository.save(event1);
 		} else {
