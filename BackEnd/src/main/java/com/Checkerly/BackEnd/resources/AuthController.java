@@ -62,4 +62,9 @@ public class AuthController {
         userDetailsService.saveOrganizer(organizer);
         return "Organizer registered successfully!";
     }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "Login page";
+    }
 }

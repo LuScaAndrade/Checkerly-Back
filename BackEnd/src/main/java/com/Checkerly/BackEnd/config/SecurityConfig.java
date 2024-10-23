@@ -121,11 +121,11 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/users/**", "/organizers/**").authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  //
+                        .loginPage("/auth/login")  //
                         .defaultSuccessUrl("/dashboard", true)
                         .permitAll()
                 )
