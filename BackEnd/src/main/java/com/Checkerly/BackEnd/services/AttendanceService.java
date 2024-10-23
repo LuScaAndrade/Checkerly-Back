@@ -7,11 +7,9 @@ import com.Checkerly.BackEnd.repository.AttendanceRepository;
 import com.Checkerly.BackEnd.repository.EventRepository;
 import com.Checkerly.BackEnd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.stream.StreamSupport;
 
 @Service
 public class AttendanceService {
