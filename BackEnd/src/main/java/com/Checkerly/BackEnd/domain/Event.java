@@ -47,7 +47,7 @@ public class Event implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Event other = (Event) obj;
 		return Objects.equals(id, other.getId());
 	}
 
