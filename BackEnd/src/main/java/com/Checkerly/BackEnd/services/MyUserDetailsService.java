@@ -65,4 +65,8 @@ public class MyUserDetailsService implements UserDetailsService {
     public Event saveEvent(Event event) {
         return eventRepository.save(event);
     }
+
+    public boolean isPasswordValid(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
 }

@@ -38,14 +38,22 @@ public class CertificateService {
 
         document.add(new Paragraph("Certificado de Comparecimento", titleFont));
         document.add(new Paragraph(" "));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph(" "));
         document.add(new Paragraph("Certificamos que:", normalFont));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph(participantInfo.get("nome"), titleFont));
+        document.add(new Paragraph(participantInfo.get("name"), titleFont));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph("Participou com sucesso no evento:", normalFont));
-        document.add(new Paragraph(participantInfo.get("evento"), normalFont));
+        document.add(new Paragraph("Participou com sucesso no evento", normalFont));
+        document.add(new Paragraph(participantInfo.get("event"), normalFont));
         document.add(new Paragraph(" "));
         document.add(new Paragraph("Data: " + LocalDate.now().toString(), normalFont));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph("Signature", normalFont));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph("Copyrights ©  2024 Checkerly®. All rights reserved ", normalFont));
 
         // Fecha o documento
         document.close();

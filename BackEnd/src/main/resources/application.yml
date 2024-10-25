@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-circular-references: true
   data:
     mongodb:
       uri: ${MONGO_URI}

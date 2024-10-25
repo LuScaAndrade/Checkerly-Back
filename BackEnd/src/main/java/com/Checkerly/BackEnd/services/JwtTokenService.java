@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Service
 public class JwtTokenService {
+
     @Value("${JWT_KEY}")
     private String jwtSecret;
 
