@@ -1,10 +1,10 @@
 package com.Checkerly.BackEnd.services;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,38 +22,22 @@ import java.util.Map;
 @Service
 public class CertificateService {
 
-    public byte[] generateCertificate(Map<String, String> participantInfo) throws DocumentException, IOException {
-        Document document = new Document();
+    public byte[] generateCertificate(Map<String, String> participantInfo) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        PdfWriter.getInstance(document, byteArrayOutputStream);
+        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
 
-        // Abre o documento
-        document.open();
+        document.add(new Paragraph("Certificado de Comparecimento")
+                .setFontSize(18).setBold());
+        document.add(new Paragraph("Certificamos que:"));
+        document.add(new Paragraph(participantInfo.get("name"))
+                .setFontSize(18).setBold());
+        document.add(new Paragraph("Participou com sucesso no evento: " + participantInfo.get("event")));
+        document.add(new Paragraph("Data: " + LocalDate.now().toString()));
+        document.add(new Paragraph("Signature"));
+        document.add(new Paragraph("Copyrights © 2024 Checkerly®. Todos direitos reservados"));
 
-        // Adiciona conteúdo ao certificado
-        Font titleFont = new Font(Font.HELVETICA, 18, Font.BOLD);
-        Font normalFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
-
-        document.add(new Paragraph("Certificado de Comparecimento", titleFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("Certificamos que:", normalFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(participantInfo.get("name"), titleFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("Participou com sucesso no evento", normalFont));
-        document.add(new Paragraph(participantInfo.get("event"), normalFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("Data: " + LocalDate.now().toString(), normalFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("Signature", normalFont));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("Copyrights ©  2024 Checkerly®. Todos direitos reservados ", normalFont));
-
-        // Fecha o documento
         document.close();
 
         return byteArrayOutputStream.toByteArray();
@@ -68,7 +52,7 @@ public class CertificateService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendCertificateByEmail(String toEmail, String participantName, byte[] certificatePdf) throws MessagingException, MessagingException {
+    public void sendCertificateByEmail(String toEmail, String participantName, byte[] certificatePdf) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -76,7 +60,6 @@ public class CertificateService {
         helper.setSubject("Seu Certificado de Participação");
         helper.setText("Olá " + participantName + ",\n\nObrigado por participar do evento. Em anexo, você encontrará seu certificado de participação.");
 
-        // Anexando o PDF do certificado
         helper.addAttachment("certificado.pdf", new ByteArrayResource(certificatePdf));
 
         mailSender.send(message);
