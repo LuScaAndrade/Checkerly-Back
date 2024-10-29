@@ -1,6 +1,7 @@
 package com.Checkerly.BackEnd.resources;
 
 
+import com.Checkerly.BackEnd.Security.CustomUserDetailsService;
 import com.Checkerly.BackEnd.dto.AttendanceDTO;
 import com.Checkerly.BackEnd.services.CertificateService;
 import com.Checkerly.BackEnd.services.AttendanceService;

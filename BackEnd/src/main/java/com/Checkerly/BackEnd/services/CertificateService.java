@@ -8,7 +8,6 @@ import com.lowagie.text.pdf.PdfWriter;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -53,7 +51,7 @@ public class CertificateService {
         document.add(new Paragraph("Signature", normalFont));
         document.add(new Paragraph(" "));
         document.add(new Paragraph(" "));
-        document.add(new Paragraph("Copyrights ©  2024 Checkerly®. All rights reserved ", normalFont));
+        document.add(new Paragraph("Copyrights ©  2024 Checkerly®. Todos direitos reservados ", normalFont));
 
         // Fecha o documento
         document.close();

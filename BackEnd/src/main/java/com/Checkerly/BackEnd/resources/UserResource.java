@@ -28,12 +28,10 @@ public class UserResource {
     	
 	@Autowired
 	private UserService service;
-	
+
 	@GetMapping
-	public ResponseEntity <List<UserDTO>> findAll() {
-		List<User> list = service.findAll();
-		List<UserDTO> listDto = list.stream().map(UserDTO::new).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+	public ResponseEntity<String> getUser() {
+		return ResponseEntity.ok("Sucesso!");
 	}
 	
 	@GetMapping("/{id}")

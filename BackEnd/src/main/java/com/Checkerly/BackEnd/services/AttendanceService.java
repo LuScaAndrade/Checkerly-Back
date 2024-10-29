@@ -1,5 +1,6 @@
 package com.Checkerly.BackEnd.services;
 
+import com.Checkerly.BackEnd.Security.CustomUserDetailsService;
 import com.Checkerly.BackEnd.domain.Attendance;
 import com.Checkerly.BackEnd.domain.Event;
 import com.Checkerly.BackEnd.dto.AttendanceDTO;
