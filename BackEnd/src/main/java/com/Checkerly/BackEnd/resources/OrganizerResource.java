@@ -22,18 +22,16 @@ import com.Checkerly.BackEnd.dto.OrganizerDTO;
 import com.Checkerly.BackEnd.services.OrganizerService;
 
 @RestController
-@RequestMapping(value="/organizers")
+@RequestMapping(value="/organizer")
 @CrossOrigin(origins = "http://localhost:5173")
 public class OrganizerResource {
        	
 	@Autowired
 	private OrganizerService service;
-	
+
 	@GetMapping
-	public ResponseEntity <List<OrganizerDTO>> findAll() {
-		List<Organizer> list = service.findAll();
-		List<OrganizerDTO> listDto = list.stream().map(OrganizerDTO::new).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+	public ResponseEntity<String> getOrganizer() {
+		return ResponseEntity.ok("Sucesso!");
 	}
 	
 	@GetMapping("/{id}")

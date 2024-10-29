@@ -27,7 +27,7 @@ import com.Checkerly.BackEnd.services.EventService;
 import com.Checkerly.BackEnd.util.URL;
 
 @RestController
-@RequestMapping(value="/events")
+@RequestMapping(value="/event")
 @CrossOrigin(origins = "http://localhost:5173")
 public class EventResource {
     
@@ -59,12 +59,10 @@ public class EventResource {
 		List<Event> list = service.fullSearch(text, min, max);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity <List<EventDTO>> findAll() {
-		List<Event> list = service.findAll();
-		List<EventDTO> listDto = list.stream().map(EventDTO::new).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+	public ResponseEntity<String> getEvent() {
+		return ResponseEntity.ok("Sucesso!");
 	}
 
 	@PostMapping

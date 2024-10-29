@@ -22,7 +22,7 @@ import com.Checkerly.BackEnd.dto.UserDTO;
 import com.Checkerly.BackEnd.services.UserService;
 
 @RestController
-@RequestMapping(value="/users")
+@RequestMapping(value="/user")
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserResource {
     	
