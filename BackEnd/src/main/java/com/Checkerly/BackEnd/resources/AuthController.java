@@ -4,10 +4,7 @@ import com.Checkerly.BackEnd.Security.TokenService;
 import com.Checkerly.BackEnd.domain.Event;
 import com.Checkerly.BackEnd.domain.Organizer;
 import com.Checkerly.BackEnd.domain.User;
-import com.Checkerly.BackEnd.dto.EventDTO;
-import com.Checkerly.BackEnd.dto.LoginRequestDTO;
-import com.Checkerly.BackEnd.dto.RegisterRequestDTO;
-import com.Checkerly.BackEnd.dto.ResponseDTO;
+import com.Checkerly.BackEnd.dto.*;
 import com.Checkerly.BackEnd.repository.EventRepository;
 import com.Checkerly.BackEnd.repository.OrganizerRepository;
 import com.Checkerly.BackEnd.repository.UserRepository;
@@ -42,6 +39,9 @@ public class AuthController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private EmailController emailService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO body) {
@@ -122,5 +122,18 @@ public class AuthController {
 
         String token = tokenService.generateEventToken(newEvent);
         return ResponseEntity.ok(new ResponseDTO(newEvent.getId(), token));
+    }
+
+    @PostMapping("/validate/qr")
+    public ResponseEntity<?> validateQr(@RequestBody EmailDTO emailDTO) {
+        // Obtenha os dados do QR code
+        String name = emailDTO.name();
+        String id = emailDTO.id();
+        String pdfPath = emailDTO.pdfPath();
+
+        // Enviar o e-mail com o certificado
+        emailService.sendEmail(emailDTO, name, id);
+
+        return ResponseEntity.ok("Certificado enviado com sucesso.");
     }
 }

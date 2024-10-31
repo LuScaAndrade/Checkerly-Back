@@ -41,8 +41,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register/user", "/auth/register/organizer", "/auth/register/event", "/email/**").permitAll()
-                        .requestMatchers("/user/**", "/organizer/**", "/event/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/auth/register/user", "/auth/register/organizer", "/auth/register/event", "/email/**", "/auth/validate/qr").permitAll()
+                        .requestMatchers("/user/**", "/organizer/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

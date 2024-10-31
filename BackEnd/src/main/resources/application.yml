@@ -11,8 +11,8 @@ app:
 mail:
   host: smtp.gmail.com
   port: 587
-  username: ${EMAIL}
-  password: ${EMAIL_KEY}
+  username: ${email}
+  password: ${email.key}
   properties:
     mail:
       smtp:

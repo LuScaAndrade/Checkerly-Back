@@ -16,7 +16,7 @@ public class EmailController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void sendEmail(@RequestBody EmailDTO emailDTO, @RequestParam String name,
-                          @RequestParam String eventName, @RequestParam String date) {
-        emailService.sendEmail(emailDTO, name, eventName, date);
+                          @RequestParam String eventName) {
+        emailService.sendEmail(emailDTO, name, eventName);
     }
 }

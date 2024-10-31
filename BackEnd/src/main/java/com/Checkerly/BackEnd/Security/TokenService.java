@@ -54,11 +54,12 @@ public class TokenService {
 
             return JWT.create()
                     .withIssuer("login-auth-api")
-                    .withSubject(event.getId())
-                    .withExpiresAt(this.generateExpirationDate())
+                    .withSubject(event.getId().toString())  // Converte ID para String, se for do tipo Long
+                    .withClaim("eventName", event.getNomeEvento())  // Adiciona o nome do evento como claim
+                    .withExpiresAt(generateExpirationDate())  // Define a data de expiração do token
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error while authenticating");
+            throw new RuntimeException("Error while creating event token", exception);
         }
     }
 

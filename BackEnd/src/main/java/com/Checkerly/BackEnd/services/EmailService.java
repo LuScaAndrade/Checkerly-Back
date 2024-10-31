@@ -23,7 +23,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendEmail(EmailDTO emailDTO, String name, String eventName, String date) {
+    public void sendEmail(EmailDTO emailDTO, String name, String eventName) {
         String directoryPath = "certificates/event-1"; // Caminho relativo
         File directory = new File(directoryPath);
         if (!directory.exists()) {
@@ -33,7 +33,7 @@ public class EmailService {
         String certificatePath = directoryPath + "/certificado.pdf"; // Caminho do PDF
         try {
             createPdf(certificatePath); // Gera o PDF apenas com a imagem
-            sendEmailWithAttachment(emailDTO.email(), "Certificado de Comparecimento", certificatePath, name, eventName, date);
+            sendEmailWithAttachment(emailDTO.email(), "Certificado de Comparecimento", certificatePath, name, eventName);
         } catch (IOException | MessagingException e) {
             e.printStackTrace();
         }
@@ -43,10 +43,11 @@ public class EmailService {
         // Criação do documento PDF
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
+        page.setRotation(90);
         document.addPage(page);
 
         // Carregar a imagem de fundo
-        PDImageXObject backgroundImage = PDImageXObject.createFromFile("C://Users/Lucas/Downloads/Certificado.png", document);
+        PDImageXObject backgroundImage = PDImageXObject.createFromFile("C://Users/Lucas/Downloads/Certificado.jpg", document);
 
         try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
             // Desenha a imagem de fundo
@@ -58,7 +59,7 @@ public class EmailService {
         document.close();
     }
 
-    private void sendEmailWithAttachment(String to, String subject, String pathToAttachment, String name, String eventName, String date) throws MessagingException, IOException {
+    private void sendEmailWithAttachment(String to, String subject, String pathToAttachment, String name, String eventName) throws MessagingException, IOException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true); // true indica que tem anexo
 
@@ -70,8 +71,7 @@ public class EmailService {
         String template = loadEmailTemplate();
         // Substituir os placeholders pelo conteúdo real
         template = template.replace("#nome", name)
-                .replace("#evento", eventName)
-                .replace("#data", date);
+                .replace("#evento", eventName);
 
         helper.setText(template, true);
 
