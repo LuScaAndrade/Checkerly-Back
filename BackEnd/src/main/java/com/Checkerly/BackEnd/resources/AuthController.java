@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+import static org.springframework.util.ClassUtils.isPresent;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -100,6 +102,14 @@ public class AuthController {
 
     @PostMapping("/register/event")
     public ResponseEntity<?> registerEvent(@RequestBody EventDTO body){
+        if (body.getId() == null) {
+            return ResponseEntity.badRequest().body("Event ID must not be null");
+        }
+
+        // Verifica se o evento já existe
+        if (eventRepository.findById(body.getId()).isPresent()) {
+            return ResponseEntity.badRequest().body("Event already exists");
+        }
         Event newEvent = new Event();
         newEvent.setNomeEvento(body.getNomeEvento());
         newEvent.setAssuntoEvento(body.getAssuntoEvento());
@@ -108,9 +118,9 @@ public class AuthController {
         newEvent.setDataInicio(body.getDataInicio());
         newEvent.setDataFim(body.getDataFim());
         newEvent.setHoraEvento(body.getHoraEvento());
+        eventRepository.save(newEvent);
 
-        this.eventRepository.save(newEvent);
-
-        return ResponseEntity.ok("Event registered successfully");
+        String token = tokenService.generateEventToken(newEvent);
+        return ResponseEntity.ok(new ResponseDTO(newEvent.getId(), token));
     }
 }

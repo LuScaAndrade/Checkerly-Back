@@ -1,4 +1,3 @@
 package com.Checkerly.BackEnd.dto;
 
-public class EmailDTO {
-}
+public record EmailDTO (String text, String email, String name, String pdfPath) { }

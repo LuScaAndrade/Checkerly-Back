@@ -1,5 +1,6 @@
 package com.Checkerly.BackEnd.Security;
 
+import com.Checkerly.BackEnd.domain.Event;
 import com.Checkerly.BackEnd.domain.Organizer;
 import com.Checkerly.BackEnd.domain.User;
 import com.auth0.jwt.JWT;
@@ -40,6 +41,20 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("login-auth-api")
                     .withSubject(organizer.getEmail())
+                    .withExpiresAt(this.generateExpirationDate())
+                    .sign(algorithm);
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Error while authenticating");
+        }
+    }
+
+    public String generateEventToken(Event event) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+
+            return JWT.create()
+                    .withIssuer("login-auth-api")
+                    .withSubject(event.getId())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
