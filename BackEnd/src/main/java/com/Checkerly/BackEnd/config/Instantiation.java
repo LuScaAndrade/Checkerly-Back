@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -54,6 +56,7 @@ public class Instantiation implements CommandLineRunner {
 		if (eventRepository.count() == 0) {
 			event1 = new Event(null, "Evento Qualquer", "Tecnologia", -15.90, 48.07, sdf.parse("24/09/2024"),
 					sdf.parse("25/09/2024"), eventHour);
+			event1.getParticipantes().add(maria);
 			eventRepository.save(event1);
 		} else {
 			event1 = eventRepository.findAll().getFirst();

@@ -10,10 +10,10 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-    @Value("${email}")
+    @Value("${EMAIL}")
     private String email;
 
-    @Value("${email.key}")
+    @Value("${EMAIL_KEY}")
     private String emailKey;
 
     @Bean

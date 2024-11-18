@@ -8,13 +8,13 @@ spring:
 app:
   jwtSecret: ${JWT_KEY}
 
-mail:
+email:
   host: smtp.gmail.com
   port: 587
-  username: ${email}
-  password: ${email.key}
+  username: ${EMAIL}
+  password: ${EMAIL_KEY}
   properties:
-    mail:
+    email:
       smtp:
         auth: true
         starttls:

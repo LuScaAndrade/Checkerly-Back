@@ -10,13 +10,13 @@ import com.Checkerly.BackEnd.repository.OrganizerRepository;
 import com.Checkerly.BackEnd.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
-import static org.springframework.util.ClassUtils.isPresent;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -45,7 +45,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO body) {
-        // Tenta encontrar o usuário no repositório de usuários
         Optional<User> userOptional = userRepository.findByEmail(body.email());
 
         if (userOptional.isPresent()) {
@@ -53,9 +52,11 @@ public class AuthController {
             if (passwordEncoder.matches(body.password(), user.getSenha())) {
                 String token = tokenService.generateUserToken(user);
                 return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+            } else {
+                // Senha incorreta
+                return ResponseEntity.badRequest().body(Map.of("message", "senha incorreta"));
             }
         } else {
-            // Caso não encontre no repositório de usuários, tenta no repositório de organizadores
             Optional<Organizer> organizerOptional = organizerRepository.findByEmail(body.email());
 
             if (organizerOptional.isPresent()) {
@@ -63,11 +64,14 @@ public class AuthController {
                 if (passwordEncoder.matches(body.password(), organizer.getSenha())) {
                     String token = tokenService.generateOrganizerToken(organizer);
                     return ResponseEntity.ok(new ResponseDTO(organizer.getName(), token));
+                } else {
+                    // Senha incorreta
+                    return ResponseEntity.badRequest().body(Map.of("message", "senha incorreta"));
                 }
             }
         }
-        // Retorna erro caso as credenciais estejam incorretas
-        return ResponseEntity.badRequest().body("Invalid email or password.");
+        // Email incorreto
+        return ResponseEntity.badRequest().body(Map.of("message", "email incorreto"));
     }
 
     @PostMapping("/register/user")
@@ -82,7 +86,16 @@ public class AuthController {
         userRepository.save(newUser);
 
         String token = tokenService.generateUserToken(newUser);
-        return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+
+        ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(2 * 60 * 60)
+                .build();
+        return ResponseEntity.ok()
+                .header("Set-Cookie", tokenCookie.toString())
+                .body(new ResponseDTO(newUser.getName(), "User registered successfuly"));
     }
 
     @PostMapping("/register/organizer")
@@ -97,7 +110,16 @@ public class AuthController {
         organizerRepository.save(newOrganizer);
 
         String token = tokenService.generateOrganizerToken(newOrganizer);
-        return ResponseEntity.ok(new ResponseDTO(newOrganizer.getName(), token));
+
+        ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(2 * 60 * 60)
+                .build();
+        return ResponseEntity.ok()
+                .header("Set-Cookie", tokenCookie.toString())
+                .body(new ResponseDTO(newOrganizer.getName(), "Organizer registered successfuly"));
     }
 
     @PostMapping("/register/event")
@@ -121,7 +143,16 @@ public class AuthController {
         eventRepository.save(newEvent);
 
         String token = tokenService.generateEventToken(newEvent);
-        return ResponseEntity.ok(new ResponseDTO(newEvent.getId(), token));
+
+        ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(2 * 60 * 60)
+                .build();
+        return ResponseEntity.ok()
+                .header("Set-Cookie", tokenCookie.toString())
+                .body(new ResponseDTO(newEvent.getId(), "Event registered successfuly"));
     }
 
     @PostMapping("/validate/qr")

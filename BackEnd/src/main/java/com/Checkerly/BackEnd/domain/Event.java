@@ -3,10 +3,14 @@ package com.Checkerly.BackEnd.domain;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import com.Checkerly.BackEnd.dto.UserDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +23,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document
-
 public class Event implements Serializable{
     @Serial
 	private static final long serialVersionUID = 1L;
@@ -34,7 +37,22 @@ public class Event implements Serializable{
 	private Date dataFim;
 	private LocalTime horaEvento;
 
-    @Override
+	@DBRef(lazy = true)
+	private List<User> participantes = new ArrayList<>();
+
+	public Event(String id, String nomeEvento, String assuntoEvento,
+				 double latitude, double longitude, Date dataInicio, Date dataFim, LocalTime horaEvento) {
+		this.id = id;
+		this.nomeEvento = nomeEvento;
+		this.assuntoEvento = assuntoEvento;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.horaEvento = horaEvento;
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
@@ -49,9 +67,5 @@ public class Event implements Serializable{
 			return false;
 		Event other = (Event) obj;
 		return Objects.equals(id, other.getId());
-	}
-
-	public Object getLocation() {
-		return "Latitude: " + this.latitude + ", Longitude: " + this.longitude;
 	}
 }
