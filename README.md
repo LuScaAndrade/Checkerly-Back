@@ -54,27 +54,27 @@ mvn spring-boot:run
 ---
 
 ## Rotas Principais 
-## ** Autenticação **
+## **Autenticação**
 - POST /auth/login
 - Endpoint para login e geração de token JWT.
 - POST /auth/register
 - Registro de novos usuários.
 
-## ** Eventos **
+## **Eventos**
 - POST /events
 - Criação de um novo evento.
 - GET /events/{id}
 - Retorna detalhes de um evento.
 
-## ** Presenças **
+## **Presenças**
 - POST /attendance
 - Registra a presença de um usuário via QR Code.
 
 ---
 
-## ** Contribuindo **
+## **Contribuindo**
 Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request para melhorias e correções.
 
 ---
 
-## ** Criado com 💻 e ☕ por Equipe Checkerly. **
+## **Criado com 💻 e ☕ por Equipe Checkerly.**
